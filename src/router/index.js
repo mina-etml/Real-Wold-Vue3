@@ -3,6 +3,7 @@ import EventListView from '../views/EventListView.vue'
 import AboutView from '../views/AboutView.vue'
 import EventDetailsView from '../views/EventDetailsView.vue'
 import Events from '../components/Events.vue'
+import Home from '../components/Home.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -31,6 +32,13 @@ const router = createRouter({
       path: '/events/:page',
       component: Events,
       props: true,
+    },
+    {
+      path: '/home',
+      name: 'Home',
+      component: Home,
+      props: (route) => ({ showExtra: route.query.e }), //http://localhost:5173/home?e=1 to test it
+      //Peu importe la valeur : si e existe, showExtra deviendra truthy → ça s’affiche.
     },
   ],
 })
