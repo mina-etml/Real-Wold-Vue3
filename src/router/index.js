@@ -1,12 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import EventListView from '../views/EventListView.vue'
 import AboutView from '../views/AboutView.vue'
-//import EventDetailsView from '../views/EventDetailsView.vue'
 import EventDetails from '../views/event/Details.vue'
 import EventRegister from '../views/event/Register.vue'
 import EventEdit from '../views/event/Edit.vue'
 import EventLayout from '../views/event/Layout.vue'
-//import Events from '../components/Events.vue'
 import Home from '../components/Home.vue'
 
 const router = createRouter({
@@ -19,16 +17,13 @@ const router = createRouter({
       props: (route) => ({ page: parseInt(route.query.page) || 1 }),
     },
     {
-      path: '/about',
-      name: 'about',
+      path: '/about-us',
+      name: 'About',
       component: AboutView,
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      // component: () => import('../views/AboutView.vue'),
+      alias: '/about',
     },
     {
-      path: '/event/:id',
+      path: '/events/:id',
       name: 'EventLayout',
       props: true,
       component: EventLayout,
@@ -53,11 +48,12 @@ const router = createRouter({
         },
       ],
     },
-    // {
-    //   path: '/events/:page',
-    //   component: Events,
-    //   props: true,
-    // },
+    {
+      path: '/event/:afterEvent(.*)',
+      redirect: (to) => {
+        return { path: '/events/' + to.params.afterEvent }
+      },
+    },
     {
       path: '/home',
       name: 'Home',
