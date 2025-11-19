@@ -11,7 +11,7 @@ const event = ref(null)
 
 onMounted(() => {
   //get events from mock db when component is created
-  EventService.getEvents(props.id)
+  EventService.getEvent(props.id)
     .then((response) => {
       event.value = response.data
     })
